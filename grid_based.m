@@ -1,7 +1,7 @@
 % entry_point
 
 % im = imread('hammer4.jpeg');
-prepareForGridBased(imread('hammer2.jpeg'));
+prepareForGridBased(imread('hammer1.jpeg'));
 % prepareForGridBased(imread('hammer4.jpeg'));
 
 % gray = rgb2gray(im);
