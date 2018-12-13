@@ -4,6 +4,7 @@ imbw = im2bw(im, 'concavity');
 if imbw(1, 1)
 	imbw = not(imbw);
 end
-showMulti({im, focusMainCentroid(im)});
+focused = focusMainCentroid(im);
+showMulti({im, focused, splitToGrid(focused, 5, 10)});
 % imshow(aligned);
 end

@@ -4,7 +4,9 @@ imbw = ensureBW(im);
 newIm = im;
 
 orientation = getMainCentroid(imbw, 'Orientation').Orientation;
+imageArea = imrotate(ones(size(newIm)(1:2)), -orientation, 'linear');
 newIm = imrotate(newIm, -orientation, 'linear');
+newIm = newIm + not(imageArea) * im(1, 1);
 imbw = imrotate(imbw, -orientation, 'linear');
 
 extrema = getMainCentroid(imbw, 'Extrema').Extrema;
