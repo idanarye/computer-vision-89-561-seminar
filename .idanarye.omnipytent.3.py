@@ -51,7 +51,7 @@ def open_shell(ctx):
     ctx.pass_data(shell)
 
 
-@task(open_shell, choose_configuration)
+@task(choose_configuration, open_shell)
 def run(ctx):
     # print(ctx.dep.choose_configuration)
     ctx.dep.open_shell << ctx.dep.choose_configuration['main_call']
