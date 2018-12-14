@@ -1,10 +1,13 @@
-function prepareForGridBased(im)
-% showMulti({im, gray, edge(gray), colorTags(bwlabel(im2bw(im, 'concavity')))})
+function [grid, pavement] = prepareForGridBased(im, gridPattern, pavementSize, writeIm)
+writeIm('base', im);
 imbw = im2bw(im, 'concavity');
 if imbw(1, 1)
 	imbw = not(imbw);
 end
-focused = focusMainCentroid(im);
-showMulti({im, focused, splitToGrid(focused, 5, 10)});
-% imshow(aligned);
+writeIm('bw', imbw);
+focused = focusMainCentroid(imbw);
+writeIm('focused', focused);
+grid = splitToGrid(focused, 10, 10);
+pavement = makePavement(grid, makePattern(gridPattern, pavementSize ./ size(grid)));
+writeIm('grid', pavement);
 end
