@@ -8,7 +8,7 @@ import re
 from plumbum import SshMachine
 
 
-@task.options
+@task.options(alias=':1')
 def choose_entry_point(ctx):
     ctx.key(str)
     for source_file in local.path('.').glob('*.m'):
