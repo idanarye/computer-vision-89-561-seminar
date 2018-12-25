@@ -1,4 +1,4 @@
-% entry_point
+pkg load image;
 
 baseDir = 'output/fourier_descriptors';
 

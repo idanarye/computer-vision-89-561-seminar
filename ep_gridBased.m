@@ -1,4 +1,4 @@
-% entry_point
+pkg load image;
 
 baseDir = 'output/gridbased';
 pavementSize = [200, 200];

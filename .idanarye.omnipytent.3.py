@@ -10,10 +10,13 @@ from plumbum import SshMachine
 
 @task.options(alias=':1')
 def choose_entry_point(ctx):
-    ctx.key(str)
-    for source_file in local.path('.').glob('*.m'):
-        if source_file.read('utf8').startswith('% entry_point'):
-            yield source_file
+    @ctx.key
+    def key(source_file):
+        return source_file.with_suffix('').basename[3:]
+    yield from local.path('.').glob('ep_*.m')
+    # for source_file in local.path('.').glob('*.m'):
+        # if source_file.read('utf8').startswith('% entry_point'):
+            # yield source_file
 
 @task(choose_entry_point)
 def choose_configuration(ctx):
@@ -47,7 +50,7 @@ def _parse_mainfile(ex_dir):
 def open_shell(ctx):
     cmd = local['octave']
     shell = cmd & TERMINAL_PANEL
-    shell << 'pkg load image;'
+    # shell << 'pkg load image;'
     ctx.pass_data(shell)
 
 

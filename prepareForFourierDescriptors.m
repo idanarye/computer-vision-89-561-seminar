@@ -1,5 +1,5 @@
 function [imOut] = prepareForFourierDescriptors(im, writeIm)
-pkg load geometry
+writeIm('base', im);
 hold off
 
 % f = figure("visible", false);
@@ -35,14 +35,21 @@ plot(radials, 'linewidth', 5, 'color', 'green');
 writeIm('radialsHist', handle2image(f));
 
 clf
-radials = abs(fft(radials));
-radials = radials / radials(1);
-radials = radials(2:end);
-bar(radials, 0.1, 'facecolor', 'yellow');
+radialsFT = abs(fft(radials));
+bar(0:length(radialsFT) - 1, radialsFT, 0.1, 'facecolor', 'yellow');
 hold on
-plot(radials, 'linewidth', 5, 'color', 'magenta');
+plot(0:length(radialsFT) - 1, radialsFT, 'linewidth', 5, 'color', 'magenta');
 
 writeIm('radialsFourier', handle2image(f));
+
+clf
+radialsNorm = radialsFT / radialsFT(1);
+radialsNorm = radialsNorm(2:end);
+bar(radialsNorm, 0.1, 'facecolor', 'yellow');
+hold on
+plot(radialsNorm, 'linewidth', 5, 'color', 'magenta');
+
+writeIm('radialsFourierNormalized', handle2image(f));
 
 hold off
 end
