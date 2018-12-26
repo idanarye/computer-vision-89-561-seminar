@@ -16,8 +16,8 @@ writeIm('outline', handle2image(f));
 
 % polygonCenter = getMainCentroid(im, 'Centroid').Centroid;
 circle = findMBC(fliplr(poly));
-center = circle(1:2);
-center = flip(polygonCenter);
+center = fliplr(circle(1:2));
+% center = flip(polygonCenter);
 % drawCircle(circle);
 thetas = [];
 prevTheta = [];
@@ -46,7 +46,7 @@ for i = 1:(size(thetas) - 1)
 	angle = t2 - t1;
 	angles = [angles angle];
 
-	drawCircleArc(center(2), center(1), max(veclens) * (0.1 + 0.06 * (t2 - t1)), rad2deg(t1), rad2deg(angle));
+	drawCircleArc(center(2), center(1), max(veclens) * (0.1 + 0.06 * (t2 - t1)), rad2deg(t1), rad2deg(angle), 'linewidth', 2);
 end
 writeIm('angles', handle2image(f));
 
